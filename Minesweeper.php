@@ -8,6 +8,12 @@ class Minesweeper {
   private $map = array();
 
   /**
+  * $gameOver boolean
+  * Stores if the game has ended.
+  */
+  private $gameOver = false;
+
+  /**
   * $width int.
   * Holds the width of the map.
   */
