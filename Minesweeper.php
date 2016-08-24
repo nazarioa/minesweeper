@@ -167,12 +167,11 @@ class Minesweeper {
   * @param none.
   */
   public function clearMap () {
-    for ($i = 0; $i < $this->width(); $i++) {
-      $this->map[$i] = array();
-      for ($j = 0; $j < $this->height(); $j++) {
-        $space = new Space();
-        $this->map[$i][$j] = $space;
+    for ($x = 0; $x < $this->height(); $x++) {
+      $this->map[$x] = array();
+      for ($y = 0; $y < $this->width(); $y++) {
         $space = new Space(array('debug' => $this->debug));
+        $this->map[$x][$y] = $space;
       }
     }
   }
@@ -319,22 +318,22 @@ class Minesweeper {
     echo 'Prinitng Map';
     echo PHP_EOL;
     echo self::C;
-    for ($i=0; $i < $this->width(); $i++) {
+    for ($y=0; $y < $this->width(); $y++) {
       echo self::H;
     }
     echo self::C;
 
     echo PHP_EOL;
 
-    for ($j=0; $j < $this->height(); $j++) {
+    for ( $x = 0; $x < $this->height(); $x++) {
       echo self::V;
-      for ($i=0; $i < $this->width(); $i++) {
-        $volatility = $this->squareVolatility($i, $j);
-        $this->map[$i][$j]->setVolatility($volatility);
+      for ($y=0; $y < $this->width(); $y++) {
+        $volatility = $this->squareVolatility($x, $y);
+        $this->map[$x][$y]->setVolatility($volatility);
         if($this->gameOver == true) {
-          echo $this->map[$i][$j]->printSquare(true);
+          echo $this->map[$x][$y]->printSquare(true);
         } else {
-          echo $this->map[$i][$j]->printSquare(false);
+          echo $this->map[$x][$y]->printSquare(false);
         }
       }
       echo self::V;
@@ -342,7 +341,7 @@ class Minesweeper {
     }
 
     echo self::C;
-    for ($i=0; $i < $this->width(); $i++) {
+    for ($y = 0; $y < $this->width(); $y++) {
       echo self::H;
     }
     echo self::C;
@@ -360,8 +359,8 @@ class Minesweeper {
   * @return bool - True we are in bounds, False we are out of bounds.
   */
   private function boundsCheck($x, $y) {
-    if ($x >= 0 && $x < $this->width() ) {
-      if ( $y >= 0 && $y < $this->height() ) {
+    if ($x >= 0 && $x < $this->height() ) {
+      if ( $y >= 0 && $y < $this->width() ) {
         return true;
       }
     }
