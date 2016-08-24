@@ -194,6 +194,10 @@ class Minesweeper {
   * @param $y int
   */
   public function defuse($x, $y) {
+    if ($this->gameOver == true) {
+      return;
+    }
+
     if($this->boundsCheck($x, $y) == false) {
       die('Out of bounds.');
     }
@@ -207,7 +211,9 @@ class Minesweeper {
     if ($result == true) {
       $this->printAnswer();
       $this->gameOver = true;
-      echo PHP_EOL . 'You hit a mine.' . "\n" . 'Game over!' . PHP_EOL;
+      echo PHP_EOL . 'You hit a mine.' . "\n" . 'Game over!';
+      echo PHP_EOL;
+      echo 'Number of recursions to solve ' . self::$loopcount;
     } else {
       $this->map[$x][$y]->setTripped(true);
       $this->testAdjacentTo ($x, $y);
