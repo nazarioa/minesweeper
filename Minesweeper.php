@@ -48,11 +48,11 @@ class Minesweeper {
     'topleft' => ['x' => -1, 'y' => -1],
     'topmiddle' => ['x' => 0, 'y' => -1],
     'topright' => ['x' => 1, 'y' => -1],
-    'left' => ['x' => -1, 'y' => 0],
     'right' => ['x' => 1, 'y' => 0],
-    'bottomleft' => ['x' => -1, 'y' => 1],
-    'bottommiddle' => ['x' => 0, 'y' => 1],
     'bottomright' => ['x' => 1, 'y' => 1],
+    'bottommiddle' => ['x' => 0, 'y' => 1],
+    'bottomleft' => ['x' => -1, 'y' => 1],
+    'left' => ['x' => -1, 'y' => 0],
   );
 
   /**
