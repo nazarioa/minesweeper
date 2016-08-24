@@ -219,84 +219,47 @@ class Minesweeper {
   private function testAdjacentTo ($x, $y) {
     self::$loopcount = self::$loopcount + 1;
 
-    if(self::$loopcount > 20) {
-      die('Loop count is ' . self::$loopcount);
-    }
-
     if ( $this->boundsCheck($x, $y) == true ) { // Are we within the bounds of the map?
 
       $volatility = $this->squareVolatility($x, $y); // Are we at a square next to a mine?
       $this->map[$x][$y]->setVolatility($volatility);
 
-      echo PHP_EOL;
-      echo ' Volaitlity for (' . $x .', ' . $y . ') is: ' . $volatility;
-
       if($volatility == 0) {
         $this->map[$x][$y]->setTripped(true); // change this sqaure to disarmed.
 
         foreach ($this->adjacents as $key => $position) {
-          echo PHP_EOL;
-          echo 'This is the next relative position. ' . $key . ' [' . $position['x'] . ', ' . $position['y'] . ']';
-          echo PHP_EOL;
-          echo 'This is the next absolut position. (' . ($x + $position['x']) . ', ' . ($y + $position['y']) . ')';
-          $this->testAdjacentTo( ($x + $position['x']), ($y + $position['y']) );
+
+          if($this->debug == true) {
+            echo PHP_EOL;
+            echo PHP_EOL;
+            echo 'The next relative position is: ' . $key . ' [' . $position['x'] . ', ' . $position['y'] . '],';
+            echo PHP_EOL;
+            echo 'which is an absolute position of: (' . ($x + $position['x']) . ', ' . ($y + $position['y']) . ')';
+          }
+
+          /*
+          This next check of code is inetretsing.
+          So if you are at square m,n and you know you have to move to square m+1,n+1, before we go down that rabbit hole,
+          lets test a few things.
+          A) Is it a valid square (in bounds of map).
+          B) Has it been tripped (have we been here).
+          */
+
+          if ( $this->boundsCheck($x + $position['x'], $y + $position['y']) == true ) { // A) is it in bounds?
+            $tripped = $this->map[$x + $position['x']][$y + $position['y']]->tripped(); // B) have we been here?
+            if( $tripped == false ) {
+              $this->testAdjacentTo( ($x + $position['x']), ($y + $position['y']) );
+            }
+          }
         }
 
       } elseif ($volatility > 0) {
-        echo PHP_EOL;
         return;
       }
     }
 
-    echo PHP_EOL;
-    echo PHP_EOL;
     return;
   }
-
-  /*
-  // if(self::$loopcount > 5) {
-  //   die('Loop count is 100');
-  // }
-  //
-  //
-  // self::$loopcount = self::$loopcount + 1;
-  //
-  // echo self::$loopcount;
-  // echo PHP_EOL;
-  //
-  // $keep_testing = true;
-  //
-  // if ( $this->boundsCheck($x, $y) == false ) { // Are we at the edge?
-  //   self::$loopcount = 0;
-  //   // $keep_testing = false;
-  //   return $keep_testing; // If we are lets stop here, try the next sqaure.
-  // }
-  //
-  // $volatility = $this->squareVolatility($x, $y); // Are we at a square next to a mine?
-  // $this->map[$x][$y]->setVolatility($volatility);
-  //
-  // echo 'Testing (' . $x . ', ' . $y . ') ' . 'And it is: ' . $volatility;
-  // echo PHP_EOL;
-  //
-  // if($volatility == 0) {
-  //   $this->map[$x][$y]->setTripped(true);
-  //
-  //   foreach ($this->adjacents as $key => $position) {
-  //     $result = $this->testAdjacentTo($x + $position[0], $y + $position[1]);
-  //     if ($result == true) {
-  //       return $keep_testing;
-  //     }
-  //   }
-  // } elseif ($volatility > 0) {
-  //   self::$loopcount = 0;
-  //   $keep_testing = false;
-  //   return $keep_testing;
-  // }
-  //
-  // echo 'Strawberry';
-  //
-  // return $keep_testing;
-  */
 
   private function squareVolatility($x, $y) {
     $volatility = 0;
