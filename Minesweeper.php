@@ -211,7 +211,6 @@ class Minesweeper {
     } else {
       $this->map[$x][$y]->setTripped(true);
       $this->testAdjacentTo ($x, $y);
-      echo self::$loopcount;
       $this->printMap();
     }
   }
@@ -281,7 +280,7 @@ class Minesweeper {
     echo 'Prinitng Map';
     echo PHP_EOL;
     echo self::C;
-    for ($y=0; $y < $this->width(); $y++) {
+    for ($y = 0; $y < $this->width(); $y++) {
       echo self::H;
     }
     echo self::C;
@@ -314,6 +313,7 @@ class Minesweeper {
     $this->gameOver = true;
     $this->printMap();
   }
+
   /**
   * boundsCheck($x, $y)
   * Checks to see if x, y coordiantes are within the map.
