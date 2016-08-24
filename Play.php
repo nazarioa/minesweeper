@@ -14,16 +14,18 @@ $mines = [
   ['x' => 0, 'y' => 2],
   ['x' => 1, 'y' => 2],
   ['x' => 2, 'y' => 2],
+
+  ['x' => 3, 'y' =>3],
+
+  ['x' => 4, 'y' =>4],
 ];
 
 
-$minesweeper = new Minesweeper (5, 5, $mines, array('debug' => true));
-// $minesweeper->defuse(1,1); // no bomb
-$minesweeper->defuse(4,4); // no bomb
-// $Minesweeper->printMap();
-// $minesweeper->defuse(1,0); // no bomb
-// $minesweeper->defuse(3,3); // no bomb
-// $minesweeper->defuse(2,3); // no bomb
-// $minesweeper->defuse(2,1); // no bomb
-// $minesweeper->defuse(2,3); // no bomb
-// $minesweeper->defuse(1,1); // bomb
+$minesweeper = new Minesweeper (5, 7, $mines, array('debug' => false));
+$minesweeper->defuse(1,1); // no bomb
+$minesweeper->defuse(4,2); // no bomb
+$minesweeper->defuse(6,0); // no bomb
+$minesweeper->defuse(0,4); // no bomb
+$minesweeper->defuse(2,1); // bomb
+$minesweeper->defuse(2,3); // no bomb
+$minesweeper->defuse(1,1); // no bomb
