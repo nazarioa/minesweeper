@@ -202,6 +202,10 @@ class Minesweeper {
       die('Out of bounds.');
     }
 
+    echo PHP_EOL . PHP_EOL;
+    echo 'Defusing (' . $x . ', ' . $y . ')';
+    echo PHP_EOL;
+
     try {
       $result = $this->map[$x][$y]->isMine();
     } catch (Exception $e) {
@@ -282,9 +286,6 @@ class Minesweeper {
   }
 
   public function printMap () {
-    echo PHP_EOL . PHP_EOL;
-    echo 'Prinitng Map';
-    echo PHP_EOL;
     echo self::C;
     for ($y = 0; $y < $this->width(); $y++) {
       echo self::H;
