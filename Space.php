@@ -27,6 +27,10 @@ class Space {
     $this->tripped = $tripped;
   }
 
+  public function tripped() {
+    return $this->tripped;
+  }
+
   public function setVolatility ($volatility) {
     if($this->debug == true) {
       echo $volatility;
