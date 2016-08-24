@@ -7,6 +7,8 @@ class Minesweeper {
   */
   private $map = array();
 
+  private $debug = false;
+
   /**
   * $gameOver boolean
   * Stores if the game has ended.
@@ -68,8 +70,8 @@ class Minesweeper {
   *
   * @return none;
   */
-  public function __construct ($width, $height, array $mines) {
-    $this->game_init($width, $height, $mines);
+  public function __construct ($width, $height, array $mines, $options = null) {
+    $this->game_init($width, $height, $mines, $options);
   }
 
   /**
@@ -84,7 +86,13 @@ class Minesweeper {
   * ];
   * @return none;
   */
-  public function game_init($width, $height, array $mines){
+  public function game_init($width, $height, array $mines, $options = null){
+    if ( is_array($options) ) {
+      if ($options['debug'] === true) {
+        $this->debug = true;
+      }
+    }
+
     try {
       $this->setWidth($width);
     } catch (Exception $e) {
@@ -139,6 +147,14 @@ class Minesweeper {
     $this->mines = $mines;
   }
 
+  public function setDebug ($debug) {
+    $this->debug = $debug;
+  }
+
+  public function debug() {
+    return $this->debug;
+  }
+
   private function buildMap() {
     $this->clearMap();
     $this->placeMines();
@@ -156,6 +172,7 @@ class Minesweeper {
       for ($j = 0; $j < $this->height(); $j++) {
         $space = new Space();
         $this->map[$i][$j] = $space;
+        $space = new Space(array('debug' => $this->debug));
       }
     }
   }

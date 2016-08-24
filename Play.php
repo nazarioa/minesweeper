@@ -17,7 +17,7 @@ $mines = [
 ];
 
 
-$minesweeper = new Minesweeper (5, 7, $mines);
+$minesweeper = new Minesweeper (5, 5, $mines, array('debug' => true));
 // $minesweeper->defuse(1,1); // no bomb
 $minesweeper->defuse(4,4); // no bomb
 // $Minesweeper->printMap();

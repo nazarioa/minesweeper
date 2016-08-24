@@ -8,11 +8,19 @@ class Space {
   private $volatility = 0;
   private $type = self::SAFE;
   private $adjacent = array();
+  private $debug = false;
 
-  public function __construct () {
+  public function __construct ($options) {
     $this->type = self::SAFE;
     $this->tripped = false;
     $this->volatility = 0;
+    $this->debug = false;
+
+    if ( is_array($options) ) {
+      if ( $options['debug'] === true) {
+        $this->debug = true;
+      }
+    }
   }
 
   public function setTripped ($tripped = false) {
@@ -20,10 +28,18 @@ class Space {
   }
 
   public function setVolatility ($volatility) {
+    if($this->debug == true) {
+      echo $volatility;
+    }
+
     $this->volatility = $volatility;
   }
 
   public function volatility () {
+    if($this->debug == true) {
+      echo  $this->volatility;
+    }
+
     return $this->volatility;
   }
 
