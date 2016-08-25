@@ -271,6 +271,11 @@ class Minesweeper {
     return;
   }
 
+  /**
+  * squareVolatility($x, $y)
+  * Finds the "volatility" index (int) of (x, y) square by looking at the
+  * adacent squares to see if they are mines themselves.
+  */
   private function squareVolatility($x, $y) {
     $volatility = 0;
     foreach ($this->adjacents as $key => $position) {
