@@ -247,9 +247,10 @@ class Minesweeper {
           }
 
           /*
-          This next check of code is inetretsing.
-          So if you are at square m,n and you know you have to move to square m+1,n+1, before we go down that rabbit hole,
-          lets test a few things.
+          This next chunk of code is inetretsing.
+          Assume that you are at square (m, n) and you know you have to move to
+          square (m+1, n+1), before the move happens and we call this function
+          recurrisvly, lets test a few things.
           A) Is it a valid square (in bounds of map).
           B) Has it been tripped (have we been here).
           */
