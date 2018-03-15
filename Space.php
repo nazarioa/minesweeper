@@ -1,4 +1,5 @@
 <?php
+namespace Minesweeper;
 class Space {
   const MINE = '*';
   const SAFE = ' ';

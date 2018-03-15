@@ -1,6 +1,6 @@
 <?php
-require_once ('Space.php');
-require_once ('Minesweeper.php');
+require_once ('./Space.php');
+require_once ('./Minesweeper.php');
 
 
 $mines = [
@@ -21,7 +21,7 @@ $mines = [
 ];
 
 
-$minesweeper = new Minesweeper (5, 7, $mines, array('debug' => false));
+$minesweeper = new Minesweeper\Minesweeper (5, 7, $mines, array('debug' => false));
 $minesweeper->defuse(1,1); // no bomb
 $minesweeper->defuse(4,2); // no bomb
 $minesweeper->defuse(6,0); // no bomb
