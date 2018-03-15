@@ -4,7 +4,7 @@ namespace Minesweeper;
 
 use Exception;
 
-class Minesweeper {
+class Board {
 
   /**
    * $map Array().
