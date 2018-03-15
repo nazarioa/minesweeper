@@ -12,7 +12,6 @@ class Space {
   private $tripped = FALSE;
   private $volatility = 0;
   private $type = self::SAFE;
-  private $adjacent = array();
   private $debug = FALSE;
 
   public function __construct( array $options = array() ) {
