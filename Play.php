@@ -20,7 +20,12 @@ $mines = [
 ];
 
 
+try {
 $minesweeper = new Minesweeper\Minesweeper ( 5, 7, $mines, array( 'debug' => FALSE ) );
+} catch(Exception $e) {
+  echo('Could not start game. See: ' . $e->getMessage() );
+}
+
 $minesweeper->defuse( 1, 1 ); // no bomb
 $minesweeper->defuse( 4, 2 ); // no bomb
 $minesweeper->defuse( 6, 0 ); // no bomb
