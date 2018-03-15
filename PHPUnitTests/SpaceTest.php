@@ -12,4 +12,11 @@ class SpaceTest extends TestCase
         $space->setMine(true);
         $this->assertEquals($space->isMine(), true);
     }
+
+    public function testSetTrippedAndTrippedTrue()
+    {
+        $space = new Minesweeper\Space();
+        $space->setTripped(true);
+        $this->assertEquals($space->tripped(), true);
+    }
 }
