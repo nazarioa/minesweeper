@@ -32,7 +32,7 @@ class Space {
   }
 
   public function setVolatility ($volatility) {
-    if($this->debug == true) {
+    if($this->debug === true) {
       echo $volatility;
     }
 
@@ -44,7 +44,7 @@ class Space {
   }
 
   public function volatility () {
-    if($this->debug == true) {
+    if($this->debug === true) {
       echo  $this->volatility;
     }
 
@@ -52,7 +52,7 @@ class Space {
   }
 
   public function setMine ($is_mine = false) {
-    if ( $is_mine == true) {
+    if ( $is_mine === true) {
       $this->type = self::MINE;
     } else {
       $this->type = self::SAFE;
@@ -64,7 +64,7 @@ class Space {
   }
 
   public function isMine () {
-    if( $this->type == self::MINE ) {
+    if( $this->type === self::MINE ) {
       return true;
     } else {
       return false;
@@ -72,17 +72,17 @@ class Space {
   }
 
   public function printSquare ($giveAnswer = false) {
-    if($giveAnswer == true) {
-      if ($this->isMine() == true) {
+    if($giveAnswer === true) {
+      if ($this->isMine() === true) {
         echo $this->type;
       } else {
         echo $this->volatility;
       }
     } else {
-      if ($this->tripped == false) {
+      if ($this->tripped === false) {
         echo self::HIDDEN;
       } else {
-        if ($this->volatility == 0){
+        if ($this->volatility === 0){
           echo self::SAFE;
         } else {
           echo $this->volatility;
