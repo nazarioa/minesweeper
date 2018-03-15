@@ -35,4 +35,39 @@ class SpaceTest extends TestCase {
     $space->setVolatility( $testVolatility );
     $this->assertEquals( $space->volatility(), $testVolatility );
   }
+
+  /**
+   * @test Minesweeper\Space::printSquare
+   */
+  public function whenNoAnswerIsSuppliedAndNotTripped() {
+    $space = new Space();
+    $space->setTripped( FALSE );
+
+    $this->expectOutputString(Space::HIDDEN);
+    echo $space->printSquare( FALSE );
+  }
+
+  /**
+   * @test Minesweeper\Space::printSquare
+   */
+  public function whenNoAnswerIsSuppliedAndIsTrippedAndVolatilityIsZero() {
+    $space = new Space();
+    $space->setTripped( TRUE );
+
+    $this->expectOutputString(Space::SAFE);
+    echo $space->printSquare( FALSE );
+  }
+
+  /**
+   * @test Minesweeper\Space::printSquare
+   */
+  public function whenNoAnswerIsSuppliedAndIsTrippedAndVolatilityIsNotZero() {
+    $space = new Space();
+    $testVolatilityValue = 3;
+    $space->setTripped( TRUE );
+    $space->setVolatility($testVolatilityValue);
+
+    $this->expectOutputString('' . $testVolatilityValue);
+    echo $space->printSquare( FALSE );
+  }
 }
