@@ -1,6 +1,5 @@
 <?php
-require_once ('./Space.php');
-require_once ('./Minesweeper.php');
+require __DIR__ . '/vendor/autoload.php';
 
 
 $mines = [

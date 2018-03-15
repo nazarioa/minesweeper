@@ -1,5 +1,6 @@
 <?php
 namespace Minesweeper;
+
 class Minesweeper {
 
   /**
