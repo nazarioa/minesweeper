@@ -1,0 +1,11 @@
+{
+    "name": "nazarioa/minesweeper",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Nazario A. Ayala",
+            "email": "nazario@niztech.com"
+        }
+    ],
+    "require": {}
+}
