@@ -7,19 +7,29 @@ require __DIR__ . '/../vendor/autoload.php';
 
 
 class SpaceTest extends TestCase {
-  public function testSetMineAndIsMine() {
+
+  /**
+   * @test Minesweeper\Space
+   */
+  public function setMineAndIsMine() {
     $space = new Space();
     $space->setMine( TRUE );
     $this->assertEquals( $space->isMine(), TRUE );
   }
 
-  public function testSetTrippedAndTrippedTrue() {
+  /**
+   * @test Minesweeper\Space
+   */
+  public function setTrippedAndTrippedTrue() {
     $space = new Space();
     $space->setTripped( TRUE );
     $this->assertEquals( $space->tripped(), TRUE );
   }
 
-  public function testSetVolatilityAndVolatility() {
+  /**
+   * @test Minesweeper\Space
+   */
+  public function setVolatilityAndVolatility() {
     $space          = new Space();
     $testVolatility = 4;
     $space->setVolatility( $testVolatility );
