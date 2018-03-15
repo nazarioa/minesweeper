@@ -36,6 +36,10 @@ class Space {
       echo $volatility;
     }
 
+    if(!is_numeric($volatility)) {
+      throw Exception('volatility must be a number');
+    }
+
     $this->volatility = $volatility;
   }
 

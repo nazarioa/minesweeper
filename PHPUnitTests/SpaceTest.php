@@ -20,4 +20,12 @@ class SpaceTest extends TestCase
         $space->setTripped(true);
         $this->assertEquals($space->tripped(), true);
     }
+
+    public function testSetVolatilityAndVolatility()
+    {
+        $space = new Space();
+        $testVolatility = 4;
+        $space->setVolatility($testVolatility);
+        $this->assertEquals($space->volatility(), $testVolatility);
+    }
 }
