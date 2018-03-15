@@ -12,16 +12,14 @@ class Space {
   private $adjacent = array();
   private $debug = false;
 
-  public function __construct ($options) {
+  public function __construct (array $options = array()) {
     $this->type = self::SAFE;
     $this->tripped = false;
     $this->volatility = 0;
     $this->debug = false;
 
-    if ( is_array($options) ) {
-      if ( $options['debug'] === true) {
-        $this->debug = true;
-      }
+    if ( isset($options['debug']) &&  $options['debug'] === true) {
+      $this->debug = true;
     }
   }
 
