@@ -2,6 +2,8 @@
 
 namespace Minesweeper;
 
+use Exception;
+
 class Minesweeper {
 
   /**
@@ -69,13 +71,16 @@ class Minesweeper {
 
 
   /**
-   * __constructor()
+   * Minesweeper constructor.
    *
    * @param $width int - Width of minesweeper map
    * @param $height int - Height of minesweeper map
-   * @param $mines array - Two dimensional array with locations of mines.
+   * @param array $mines array - Two dimensional array with locations of mines.
+   * @param array $options
+   *
+   * @throws \Exception
    */
-  public function __construct( $width, $height, array $mines, $options = NULL ) {
+  public function __construct( $width, $height, array $mines, array $options = array() ) {
     $this->game_init( $width, $height, $mines, $options );
   }
 
@@ -84,14 +89,17 @@ class Minesweeper {
    *
    * @param $width int - Width of minesweeper map
    * @param $height int - Height of minesweeper map
-   * @param $mines array - Two dimensional array with locations of mines.
+   * @param array $mines - Two dimensional array with locations of mines.
    * Example:
    * $mines = [
    *  ['x' => 1, 'y' => 1],
    *  ['x' => 0, 'y' => 2],
    * ];
+   * @param array $options
+   *
+   * @throws \Exception
    */
-  public function game_init( $width, $height, array $mines, $options = NULL ) {
+  public function game_init( $width, $height, array $mines, array $options = array() ) {
     if ( is_array( $options ) ) {
       if ( $options['debug'] === TRUE ) {
         $this->debug = TRUE;
@@ -120,6 +128,13 @@ class Minesweeper {
     $this->printMap();
   }
 
+  /**
+   * setWidth
+   *
+   * @param $width
+   *
+   * @throws \Exception
+   */
   private function setWidth( $width ) {
     if ( ! is_int( $width ) ) {
       throw new Exception( "Not an integer", 1 );
@@ -132,6 +147,13 @@ class Minesweeper {
     return $this->width;
   }
 
+  /**
+   * setHeight
+   *
+   * @param $height
+   *
+   * @throws \Exception
+   */
   private function setHeight( $height ) {
     if ( ! is_int( $height ) ) {
       throw new Exception( "Not an integer", 1 );
@@ -144,7 +166,14 @@ class Minesweeper {
     return $this->height;
   }
 
-  private function setMines( $mines ) {
+  /**
+   * setMines
+   *
+   * @param array $mines
+   *
+   * @throws \Exception
+   */
+  private function setMines( array $mines ) {
     if ( ! is_array( $mines ) ) {
       throw new Exception( "Not an array", 1 );
     }
@@ -195,6 +224,8 @@ class Minesweeper {
    *
    * @param $x int
    * @param $y int
+   *
+   * @throws \Exception
    */
   public function defuse( $x, $y ) {
     if ( $this->gameOver == TRUE ) {

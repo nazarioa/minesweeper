@@ -2,6 +2,8 @@
 
 namespace Minesweeper;
 
+use Exception;
+
 class Space {
   const MINE = '*';
   const SAFE = ' ';
@@ -32,13 +34,18 @@ class Space {
     return $this->tripped;
   }
 
+  /**
+   * @param $volatility
+   *
+   * @throws \Exception
+   */
   public function setVolatility( $volatility ) {
     if ( $this->debug === TRUE ) {
       echo $volatility;
     }
 
     if ( ! is_numeric( $volatility ) ) {
-      throw Exception( 'volatility must be a number' );
+      throw new Exception( 'volatility must be a number' );
     }
 
     $this->volatility = $volatility;
