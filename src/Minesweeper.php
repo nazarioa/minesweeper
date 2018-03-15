@@ -51,14 +51,14 @@ class Minesweeper {
    * top left corner of a 3x3 square. Center square is omitted.
    */
   private $adjacents = array(
-    'topleft'      => [ 'x' => - 1, 'y' => - 1 ],
-    'topmiddle'    => [ 'x' => 0, 'y' => - 1 ],
-    'topright'     => [ 'x' => 1, 'y' => - 1 ],
-    'right'        => [ 'x' => 1, 'y' => 0 ],
-    'bottomright'  => [ 'x' => 1, 'y' => 1 ],
-    'bottommiddle' => [ 'x' => 0, 'y' => 1 ],
-    'bottomleft'   => [ 'x' => - 1, 'y' => 1 ],
-    'left'         => [ 'x' => - 1, 'y' => 0 ],
+    'top_left'      => [ 'x' => - 1, 'y' => - 1 ],
+    'top_middle'    => [ 'x' => 0, 'y' => - 1 ],
+    'top_right'     => [ 'x' => 1, 'y' => - 1 ],
+    'middle_right'  => [ 'x' => 1, 'y' => 0 ],
+    'bottom_right'  => [ 'x' => 1, 'y' => 1 ],
+    'bottom_middle' => [ 'x' => 0, 'y' => 1 ],
+    'bottom_left'   => [ 'x' => - 1, 'y' => 1 ],
+    'middle_left'   => [ 'x' => - 1, 'y' => 0 ],
   );
 
   /**
