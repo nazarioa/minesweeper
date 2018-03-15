@@ -32,11 +32,11 @@ class Minesweeper {
 
   /**
    * const C, H, V
-   * These constants are used in the priniting of a map.
+   * These constants are used in the printing of a map.
    *
    * C - Map corner.
    * H - Map horizontal edge.
-   * V - Map verticle edge.
+   * V - Map vertical edge.
    */
   const C = '+';
   const H = '-';
@@ -44,8 +44,11 @@ class Minesweeper {
 
   /**
    * $adjacents array const.
-   * An array holding relative addresses of adacent cells.
+   * An array holding relative addresses of adjacent cells.
    * This array is not altered during execution. It is used as short hand.
+   *
+   * Note: It was written to be in clockwise direction starting from the
+   * top left corner of a 3x3 square. Center square is omitted.
    */
   private $adjacents = array(
     'topleft'      => [ 'x' => - 1, 'y' => - 1 ],
@@ -59,10 +62,10 @@ class Minesweeper {
   );
 
   /**
-   * $loopcount int
+   * $loopCount int
    * Used for troubleshooting.
    */
-  private static $loopcount = 0;
+  private static $loopCount = 0;
 
 
   /**
@@ -70,9 +73,7 @@ class Minesweeper {
    *
    * @param $width int - Width of minesweeper map
    * @param $height int - Height of minesweeper map
-   * @param $mines array - Two demensional array with locations of mines.
-   *
-   * @return none;
+   * @param $mines array - Two dimensional array with locations of mines.
    */
   public function __construct( $width, $height, array $mines, $options = NULL ) {
     $this->game_init( $width, $height, $mines, $options );
@@ -83,14 +84,12 @@ class Minesweeper {
    *
    * @param $width int - Width of minesweeper map
    * @param $height int - Height of minesweeper map
-   * @param $mines array - Two demensional array with locations of mines.
+   * @param $mines array - Two dimensional array with locations of mines.
    * Example:
    * $mines = [
    *  ['x' => 1, 'y' => 1],
    *  ['x' => 0, 'y' => 2],
    * ];
-   *
-   * @return none;
    */
   public function game_init( $width, $height, array $mines, $options = NULL ) {
     if ( is_array( $options ) ) {
@@ -169,8 +168,6 @@ class Minesweeper {
   /**
    * clearMap()
    * Goes over map and stores Space objects in each.
-   *
-   * @param none.
    */
   public function clearMap() {
     for ( $x = 0; $x < $this->height(); $x ++ ) {
@@ -185,8 +182,6 @@ class Minesweeper {
   /**
    * placeMines()
    * Takes $mines array and stores sets Space objects to be mines
-   *
-   * @param none.
    */
   public function placeMines() {
     foreach ( $this->mines as $key => $entry ) {
@@ -196,7 +191,7 @@ class Minesweeper {
 
   /**
    * defuse($x, $y)
-   * The method to call when a player wishes to try their luck at difusing a mine.
+   * The method to call when a player wishes to try their luck at defusing a mine.
    *
    * @param $x int
    * @param $y int
@@ -225,7 +220,7 @@ class Minesweeper {
       $this->gameOver = TRUE;
       echo PHP_EOL . 'You hit a mine.' . "\n" . 'Game over!';
       echo PHP_EOL;
-      echo 'Number of recursions to solve ' . self::$loopcount;
+      echo 'Number of recursions to solve ' . self::$loopCount;
     } else {
       $this->map[ $x ][ $y ]->setTripped( TRUE );
       $this->testAdjacentTo( $x, $y );
@@ -234,7 +229,7 @@ class Minesweeper {
   }
 
   private function testAdjacentTo( $x, $y ) {
-    self::$loopcount = self::$loopcount + 1;
+    self::$loopCount = self::$loopCount + 1;
 
     if ( $this->boundsCheck( $x, $y ) == TRUE ) { // Are we within the bounds of the map?
 
@@ -242,7 +237,7 @@ class Minesweeper {
       $this->map[ $x ][ $y ]->setVolatility( $volatility );
 
       if ( $volatility == 0 ) {
-        $this->map[ $x ][ $y ]->setTripped( TRUE ); // change this sqaure to disarmed.
+        $this->map[ $x ][ $y ]->setTripped( TRUE ); // change this square to disarmed.
 
         foreach ( $this->adjacents as $key => $position ) {
 
@@ -255,10 +250,10 @@ class Minesweeper {
           }
 
           /*
-          This next chunk of code is inetretsing.
+          This next chunk of code is interesting.
           Assume that you are at square (m, n) and you know you have to move to
           square (m+1, n+1), before the move happens and we call this function
-          recurrisvly, lets test a few things.
+          recursively, lets test a few things.
           A) Is it a valid square (in bounds of map).
           B) Has it been tripped (have we been here).
           */
@@ -282,7 +277,7 @@ class Minesweeper {
   /**
    * squareVolatility($x, $y)
    * Finds the "volatility" index (int) of (x, y) square by looking at the
-   * adacent squares to see if they are mines themselves.
+   * adjacent squares to see if they are mines themselves.
    */
   private function squareVolatility( $x, $y ) {
     $volatility = 0;
@@ -338,7 +333,7 @@ class Minesweeper {
 
   /**
    * boundsCheck($x, $y)
-   * Checks to see if x, y coordiantes are within the map.
+   * Checks to see if x, y coordinates are within the map.
    *
    * @param $x int
    * @param $y int
