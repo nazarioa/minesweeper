@@ -228,11 +228,11 @@ class Board {
    * @throws \Exception
    */
   public function defuse( $x, $y ) {
-    if ( $this->gameOver == TRUE ) {
+    if ( $this->gameOver === TRUE ) {
       return;
     }
 
-    if ( $this->boundsCheck( $x, $y ) == FALSE ) {
+    if ( $this->boundsCheck( $x, $y ) === FALSE ) {
       die( 'Out of bounds.' );
     }
 
@@ -246,7 +246,7 @@ class Board {
       throw new Exception( "Error Processing Request: " . $x . $y, 1 );
     }
 
-    if ( $result == TRUE ) {
+    if ( $result === TRUE ) {
       $this->printAnswer();
       $this->gameOver = TRUE;
       echo PHP_EOL . 'You hit a mine.' . "\n" . 'Game over!';
@@ -262,17 +262,17 @@ class Board {
   private function testAdjacentTo( $x, $y ) {
     self::$loopCount = self::$loopCount + 1;
 
-    if ( $this->boundsCheck( $x, $y ) == TRUE ) { // Are we within the bounds of the map?
+    if ( $this->boundsCheck( $x, $y ) === TRUE ) { // Are we within the bounds of the map?
 
       $volatility = $this->squareVolatility( $x, $y ); // Are we at a square next to a mine?
       $this->map[ $x ][ $y ]->setVolatility( $volatility );
 
-      if ( $volatility == 0 ) {
         $this->map[ $x ][ $y ]->setTripped( TRUE ); // change this square to disarmed.
+      if ( $volatility === 0 ) {
 
         foreach ( $this->adjacents as $key => $position ) {
 
-          if ( $this->debug == TRUE ) {
+          if ( $this->debug === TRUE ) {
             echo PHP_EOL;
             echo PHP_EOL;
             echo 'The next relative position is: ' . $key . ' [' . $position['x'] . ', ' . $position['y'] . '],';
@@ -289,9 +289,9 @@ class Board {
           B) Has it been tripped (have we been here).
           */
 
-          if ( $this->boundsCheck( $x + $position['x'], $y + $position['y'] ) == TRUE ) { // A) is it in bounds?
             $tripped = $this->map[ $x + $position['x'] ][ $y + $position['y'] ]->tripped(); // B) have we been here?
-            if ( $tripped == FALSE ) {
+          if ( $this->boundsCheck( $x + $position['x'], $y + $position['y'] ) === TRUE ) { // A) is it in bounds?
+            if ( $tripped === FALSE ) {
               $this->testAdjacentTo( ( $x + $position['x'] ), ( $y + $position['y'] ) );
             }
           }
@@ -315,9 +315,9 @@ class Board {
     foreach ( $this->adjacents as $key => $position ) {
       $newX = $x - $position['x'];
       $newY = $y - $position['y'];
-      if ( $this->boundsCheck( $newX, $newY ) == TRUE ) {
         $isMine = $this->map[ $newX ][ $newY ]->isMine();
-        if ( $isMine == TRUE ) {
+      if ( $this->boundsCheck( $newX, $newY ) === TRUE ) {
+        if ( $isMine === TRUE ) {
           $volatility ++;
         }
       }
@@ -340,8 +340,8 @@ class Board {
       for ( $y = 0; $y < $this->width(); $y ++ ) {
         $volatility = $this->squareVolatility( $x, $y );
         $this->map[ $x ][ $y ]->setVolatility( $volatility );
-        if ( $this->gameOver == TRUE ) {
           echo $this->map[ $x ][ $y ]->printSquare( TRUE );
+        if ( $this->gameOver === TRUE ) {
         } else {
           echo $this->map[ $x ][ $y ]->printSquare( FALSE );
         }
