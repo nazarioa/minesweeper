@@ -40,9 +40,9 @@ class Board {
    * H - Map horizontal edge.
    * V - Map vertical edge.
    */
-  const C = '+';
-  const H = '-';
-  const V = '|';
+  const MAP_CORNER = '+';
+  const MAP_EDGE_TOPS = '-';
+  const MAP_EDGE_SIDE = '|';
 
   /**
    * $adjacents array const.
@@ -327,16 +327,16 @@ class Board {
   }
 
   public function printMap() {
-    echo self::C;
+    echo self::MAP_CORNER;
     for ( $y = 0; $y < $this->width(); $y ++ ) {
-      echo self::H;
+      echo self::MAP_EDGE_TOPS;
     }
-    echo self::C;
+    echo self::MAP_CORNER;
 
     echo PHP_EOL;
 
     for ( $x = 0; $x < $this->height(); $x ++ ) {
-      echo self::V;
+      echo self::MAP_EDGE_SIDE;
       for ( $y = 0; $y < $this->width(); $y ++ ) {
         $volatility = $this->squareVolatility( $x, $y );
         $this->map[ $x ][ $y ]->setVolatility( $volatility );
@@ -346,15 +346,15 @@ class Board {
           echo $this->map[ $x ][ $y ]->printSquare( FALSE );
         }
       }
-      echo self::V;
+      echo self::MAP_EDGE_SIDE;
       echo PHP_EOL;
     }
 
-    echo self::C;
+    echo self::MAP_CORNER;
     for ( $y = 0; $y < $this->width(); $y ++ ) {
-      echo self::H;
+      echo self::MAP_EDGE_TOPS;
     }
-    echo self::C;
+    echo self::MAP_CORNER;
   }
 
   private function printAnswer() {
