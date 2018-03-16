@@ -100,10 +100,8 @@ class Board {
    * @throws \Exception
    */
   public function game_init( $width, $height, array $mines, array $options = array() ) {
-    if ( is_array( $options ) ) {
-      if ( $options['debug'] === TRUE ) {
-        $this->debug = TRUE;
-      }
+    if ( $options['debug'] === TRUE ) {
+      $this->debug = TRUE;
     }
 
     try {
