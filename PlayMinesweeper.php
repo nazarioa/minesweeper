@@ -21,7 +21,7 @@ $mines = [
 
 
 try {
-$minesweeper = new Minesweeper\Board ( 5, 7, $mines, array( 'debug' => FALSE ) );
+$minesweeper = Minesweeper\Board::game_init( 5, 7, $mines, array( 'debug' => FALSE ) );
 } catch(Exception $e) {
   echo('Could not start game. See: ' . $e->getMessage() );
 }

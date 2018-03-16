@@ -71,21 +71,9 @@ class Board {
 
 
   /**
-   * Minesweeper constructor.
-   *
-   * @param $width int - Width of minesweeper map
-   * @param $height int - Height of minesweeper map
-   * @param array $mines array - Two dimensional array with locations of mines.
-   * @param array $options
-   *
-   * @throws \Exception
-   */
-  public function __construct( $width, $height, array $mines, array $options = array() ) {
-    $this->game_init( $width, $height, $mines, $options );
-  }
-
-  /**
-   * game_init()
+   * Create board in one of two ways:
+   * - Board::game_init() where all aspects of the game must be defined by the user.
+   * - Board::random() where the mines are randomly placed given a width, height, and difficulty.
    *
    * @param $width int - Width of minesweeper map
    * @param $height int - Height of minesweeper map
@@ -95,11 +83,10 @@ class Board {
    *  ['x' => 1, 'y' => 1],
    *  ['x' => 0, 'y' => 2],
    * ];
-   * @param array $options
    *
    * @throws \Exception
    */
-  public function game_init( $width, $height, array $mines, array $options = array() ) {
+  private function __construct( $width, $height, array $mines, array $options = array() ) {
     if ( $options['debug'] === TRUE ) {
       $this->debug = TRUE;
     }
@@ -124,6 +111,40 @@ class Board {
 
     $this->buildMap();
     $this->printMap();
+  }
+
+  /**
+   * @param $width
+   * @param $height
+   * @param array $mines
+   * @param array $options
+   *
+   * @return \Minesweeper\Board
+   * @throws \Exception
+   */
+  public static function game_init( $width, $height, array $mines, array $options = array() ) {
+    try {
+      $board = new Board($width, $height, $mines, $options);
+    } catch (Exception $e) {
+      throw new Exception('Could not setup board. See: ', $e->getMessage());
+    }
+
+    return $board;
+  }
+
+  /**
+   * Todo:
+   *
+   * @param $width
+   * @param $height
+   * @param int $difficulty
+   *
+   * @return \Minesweeper\Board
+   * @throws \Exception
+   */
+  public static function random( $width, $height, $difficulty = 1) {
+    $board = new Board($width, $height, array(), array());
+    return $board;
   }
 
   /**
