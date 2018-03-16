@@ -8,7 +8,8 @@
         }
     ],
     "scripts": {
-      "test": "./vendor/bin/phpunit ./PHPUnitTests/*.php"
+      "test": "./vendor/bin/phpunit ./PHPUnitTests/*.php",
+      "play": "php ./PlayMinesweeper.php"
     },
     "require": {},
     "require-dev": {
