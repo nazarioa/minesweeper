@@ -12,21 +12,21 @@ use Minesweeper\Board;
 class BoardTest extends TestCase {
 
   /**
-   * @test
+   * todo: test
    */
   public function game_init() {
 
   }
 
   /**
-   * @test
+   * todo: test
    */
   public function clearMap() {
 
   }
 
   /**
-   * @test
+   * todo: test
    */
   public function placeMines() {
 
@@ -34,14 +34,14 @@ class BoardTest extends TestCase {
 
 
   /**
-   * @test
+   * todo: test
    */
   public function defuse() {
 
   }
 
   /**
-   * @test
+   * todo: test
    */
   public function printMap() {
 
