@@ -10,7 +10,7 @@ class Board {
    * $map Array().
    * Holds Space objects that make up the Minesweeper map.
    */
-  private $map = array();
+  private $boardMap = array();
 
   private $debug = FALSE;
 
@@ -200,10 +200,10 @@ class Board {
    */
   public function clearMap() {
     for ( $x = 0; $x < $this->height(); $x ++ ) {
-      $this->map[ $x ] = array();
+      $this->boardMap[ $x ] = array();
       for ( $y = 0; $y < $this->width(); $y ++ ) {
-        $space                 = new Space( array( 'debug' => $this->debug ) );
-        $this->map[ $x ][ $y ] = $space;
+        $space                      = new Space( array( 'debug' => $this->debug ) );
+        $this->boardMap[ $x ][ $y ] = $space;
       }
     }
   }
@@ -214,7 +214,7 @@ class Board {
    */
   public function placeMines() {
     foreach ( $this->mines as $key => $entry ) {
-      $this->map[ $entry['x'] ][ $entry['y'] ]->setMine( TRUE );
+      $this->boardMap[ $entry['x'] ][ $entry['y'] ]->setMine( TRUE );
     }
   }
 
@@ -241,7 +241,7 @@ class Board {
     echo PHP_EOL;
 
     try {
-      $result = $this->map[ $x ][ $y ]->isMine();
+      $result = $this->boardMap[ $x ][ $y ]->isMine();
     } catch ( Exception $e ) {
       throw new Exception( "Error Processing Request: " . $x . $y, 1 );
     }
@@ -253,7 +253,7 @@ class Board {
       echo PHP_EOL;
       echo 'Number of recursions to solve ' . self::$loopCount;
     } else {
-      $this->map[ $x ][ $y ]->setTripped( TRUE );
+      $this->boardMap[ $x ][ $y ]->setTripped( TRUE );
       $this->testAdjacentTo( $x, $y );
       $this->printMap();
     }
@@ -265,10 +265,10 @@ class Board {
     if ( $this->boundsCheck( $x, $y ) === TRUE ) { // Are we within the bounds of the map?
 
       $volatility = $this->squareVolatility( $x, $y ); // Are we at a square next to a mine?
-      $this->map[ $x ][ $y ]->setVolatility( $volatility );
+      $this->boardMap[ $x ][ $y ]->setVolatility( $volatility );
 
-        $this->map[ $x ][ $y ]->setTripped( TRUE ); // change this square to disarmed.
       if ( $volatility === 0 ) {
+        $this->boardMap[ $x ][ $y ]->setTripped( TRUE ); // change this square to disarmed.
 
         foreach ( $this->adjacents as $key => $position ) {
 
@@ -289,8 +289,8 @@ class Board {
           B) Has it been tripped (have we been here).
           */
 
-            $tripped = $this->map[ $x + $position['x'] ][ $y + $position['y'] ]->tripped(); // B) have we been here?
           if ( $this->boundsCheck( $x + $position['x'], $y + $position['y'] ) === TRUE ) { // A) is it in bounds?
+            $tripped = $this->boardMap[ $x + $position['x'] ][ $y + $position['y'] ]->tripped(); // B) have we been here?
             if ( $tripped === FALSE ) {
               $this->testAdjacentTo( ( $x + $position['x'] ), ( $y + $position['y'] ) );
             }
@@ -315,8 +315,8 @@ class Board {
     foreach ( $this->adjacents as $key => $position ) {
       $newX = $x - $position['x'];
       $newY = $y - $position['y'];
-        $isMine = $this->map[ $newX ][ $newY ]->isMine();
       if ( $this->boundsCheck( $newX, $newY ) === TRUE ) {
+        $isMine = $this->boardMap[ $newX ][ $newY ]->isMine();
         if ( $isMine === TRUE ) {
           $volatility ++;
         }
@@ -339,11 +339,11 @@ class Board {
       echo self::MAP_EDGE_SIDE;
       for ( $y = 0; $y < $this->width(); $y ++ ) {
         $volatility = $this->squareVolatility( $x, $y );
-        $this->map[ $x ][ $y ]->setVolatility( $volatility );
-          echo $this->map[ $x ][ $y ]->printSquare( TRUE );
+        $this->boardMap[ $x ][ $y ]->setVolatility( $volatility );
         if ( $this->gameOver === TRUE ) {
+          echo $this->boardMap[ $x ][ $y ]->printSquare( TRUE );
         } else {
-          echo $this->map[ $x ][ $y ]->printSquare( FALSE );
+          echo $this->boardMap[ $x ][ $y ]->printSquare( FALSE );
         }
       }
       echo self::MAP_EDGE_SIDE;
