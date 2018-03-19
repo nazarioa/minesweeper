@@ -71,11 +71,7 @@ class Space {
   }
 
   public function isMine() {
-    if ( $this->type === self::MINE ) {
-      return TRUE;
-    } else {
-      return FALSE;
-    }
+    return $this->type === self::MINE;
   }
 
   public function printSquare( $revealAnswer = FALSE ) {
