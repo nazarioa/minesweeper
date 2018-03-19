@@ -78,22 +78,18 @@ class Space {
     }
   }
 
-  public function printSquare( $giveAnswer = FALSE ) {
-    if ( $giveAnswer === TRUE ) {
+  public function printSquare( $revealAnswer = FALSE ) {
+    if ( $revealAnswer === TRUE ) {
       if ( $this->isMine() === TRUE ) {
         echo $this->type;
       } else {
-        echo $this->volatility;
+        echo $this->volatility === 0 ? Space::SAFE : $this->volatility;
       }
     } else {
       if ( $this->tripped === FALSE ) {
         echo self::HIDDEN;
       } else {
-        if ( $this->volatility === 0 ) {
-          echo self::SAFE;
-        } else {
-          echo $this->volatility;
-        }
+        echo $this->volatility === 0 ? Space::SAFE : $this->volatility;
       }
     }
   }
