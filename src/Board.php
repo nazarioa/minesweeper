@@ -94,19 +94,19 @@ class Board {
     try {
       $this->setWidth( $width );
     } catch ( Exception $e ) {
-      throw new Exception( "Width invalid", 1 );
+      throw new Exception( "Width invalid" );
     }
 
     try {
       $this->setHeight( $height );
     } catch ( Exception $e ) {
-      throw new Exception( "Height invalid", 1 );
+      throw new Exception( "Height invalid");
     }
 
     try {
       $this->setMines( $mines );
     } catch ( Exception $e ) {
-      throw new Exception( "Third parameter should be an array of mines.", 1 );
+      throw new Exception( "Third parameter should be an array of mines." );
     }
 
     $this->buildMap();
@@ -126,7 +126,7 @@ class Board {
     try {
       $board = new Board($width, $height, $mines, $options);
     } catch (Exception $e) {
-      throw new Exception('Could not setup board. See: ', $e->getMessage());
+      throw new Exception('Could not setup board. ' . $e->getMessage());
     }
 
     return $board;
