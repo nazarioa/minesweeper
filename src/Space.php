@@ -4,89 +4,99 @@ namespace Minesweeper;
 
 use Exception;
 
-class Space {
-  const MINE = '*';
-  const SAFE = ' ';
-  const HIDDEN = '•';
+class Space
+{
+    const MINE = '*';
+    const SAFE = ' ';
+    const HIDDEN = '•';
 
-  private $tripped = FALSE;
-  private $volatility = 0;
-  private $type = self::SAFE;
-  private $debug = FALSE;
+    private $tripped = false;
+    private $volatility = 0;
+    private $type = self::SAFE;
+    private $debug = false;
 
-  public function __construct( array $options = array() ) {
-    $this->type       = self::SAFE;
-    $this->tripped    = FALSE;
-    $this->volatility = 0;
-    $this->debug      = FALSE;
+    public function __construct(array $options = array())
+    {
+        $this->type = self::SAFE;
+        $this->tripped = false;
+        $this->volatility = 0;
+        $this->debug = false;
 
-    if ( isset( $options['debug'] ) && $options['debug'] === TRUE ) {
-      $this->debug = TRUE;
-    }
-  }
-
-  public function setTripped( $tripped = FALSE ) {
-    $this->tripped = $tripped;
-  }
-
-  public function tripped() {
-    return $this->tripped;
-  }
-
-  /**
-   * @param $volatility
-   *
-   * @throws \Exception
-   */
-  public function setVolatility( $volatility ) {
-    if ( $this->debug === TRUE ) {
-      echo $volatility;
+        if (isset($options['debug']) && $options['debug'] === true) {
+            $this->debug = true;
+        }
     }
 
-    if ( ! is_numeric( $volatility ) ) {
-      throw new Exception( 'volatility must be a number' );
+    public function setTripped($tripped = false)
+    {
+        $this->tripped = $tripped;
     }
 
-    $this->volatility = $volatility;
-  }
-
-  public function volatility() {
-    if ( $this->debug === TRUE ) {
-      echo $this->volatility;
+    public function tripped()
+    {
+        return $this->tripped;
     }
 
-    return $this->volatility;
-  }
+    /**
+     * @param $volatility
+     *
+     * @throws \Exception
+     */
+    public function setVolatility($volatility)
+    {
+        if ($this->debug === true) {
+            echo $volatility;
+        }
 
-  public function setMine( $is_mine = FALSE ) {
-    if ( $is_mine === TRUE ) {
-      $this->type = self::MINE;
-    } else {
-      $this->type = self::SAFE;
+        if (!is_numeric($volatility)) {
+            throw new Exception('volatility must be a number');
+        }
+
+        $this->volatility = $volatility;
     }
-  }
 
-  public function mine() {
-    return $this->type;
-  }
+    public function volatility()
+    {
+        if ($this->debug === true) {
+            echo $this->volatility;
+        }
 
-  public function isMine() {
-    return $this->type === self::MINE;
-  }
-
-  public function printSquare( $revealAnswer = FALSE ) {
-    if ( $revealAnswer === TRUE ) {
-      if ( $this->isMine() === TRUE ) {
-        echo $this->type;
-      } else {
-        echo $this->volatility === 0 ? Space::SAFE : $this->volatility;
-      }
-    } else {
-      if ( $this->tripped === FALSE ) {
-        echo self::HIDDEN;
-      } else {
-        echo $this->volatility === 0 ? Space::SAFE : $this->volatility;
-      }
+        return $this->volatility;
     }
-  }
+
+    public function setMine($is_mine = false)
+    {
+        if ($is_mine === true) {
+            $this->type = self::MINE;
+        } else {
+            $this->type = self::SAFE;
+        }
+    }
+
+    public function mine()
+    {
+        return $this->type;
+    }
+
+    public function isMine()
+    {
+        return $this->type === self::MINE;
+    }
+
+    public function printSquare($revealAnswer = false)
+    {
+        if ($revealAnswer === true) {
+            if ($this->isMine() === true) {
+                echo $this->type;
+            } else {
+                echo $this->volatility === 0 ? Space::SAFE : $this->volatility;
+            }
+        } else {
+            if ($this->tripped === false) {
+                echo self::HIDDEN;
+            } else {
+                echo $this->volatility === 0 ? Space::SAFE : $this->volatility;
+            }
+        }
+    }
 }
